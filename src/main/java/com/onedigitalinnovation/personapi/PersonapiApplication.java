@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/people")
 public class PersonapiApplication {
 
-	@GetMapping
+
 	public String getBook() {
 		return "API test";
 	}
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(PersonapiApplication.class, args);
