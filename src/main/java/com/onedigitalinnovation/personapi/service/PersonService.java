@@ -6,6 +6,7 @@ import com.onedigitalinnovation.personapi.entity.Person;
 import com.onedigitalinnovation.personapi.exception.PersonNotFoundException;
 import com.onedigitalinnovation.personapi.mapper.PersonMapper;
 import com.onedigitalinnovation.personapi.repository.PersonRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
     private static PersonRepository personRepository;
 
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
-
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
 
     public static void delete(Long id) throws PersonNotFoundException {
         verifyIfNotExists(id);
