@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
-    private PersonRepository personRepository;
+    private static PersonRepository personRepository;
 
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
@@ -24,6 +24,12 @@ public class PersonService {
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
+
+    public static void delete(Long id) throws PersonNotFoundException {
+        verifyIfNotExists(id);
+
+    }
+
     public MessageResponseDTO createPerson(PersonDTO personDTO){
         Person personToSave = personMapper.toModel(personDTO);
 
@@ -43,11 +49,22 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
     public PersonDTO findById( Long Id ) throws PersonNotFoundException {
-        Person person = personRepository.findById(Id)
-                .orElseThrow(() -> new PersonNotFoundException(Id));
+        Person person = verifyIfNotExists(Id);
 
         return personMapper.toDTO(person);
     }
+
+    public void deleteById( Long id) throws PersonNotFoundException {
+        verifyIfNotExists(id);
+
+        personRepository.deleteById( id );
+    }
+
+    private static Person verifyIfNotExists(Long Id) throws PersonNotFoundException {
+        return personRepository.findById(Id)
+                .orElseThrow(() -> new PersonNotFoundException(Id));
+    }
+
 }
 
 
