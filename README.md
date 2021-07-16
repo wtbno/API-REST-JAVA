@@ -1,4 +1,4 @@
-## Project to develop a people management system - Digital Innovation One (GFT) - API REST Spring boot - JAVA  
+## Project to develop a people management system - Digital Innovation One Bootcamp - API REST Spring boot - JAVA  
 
 
 
